@@ -11,16 +11,16 @@ public class EnemyQuarryAI : EnemyAIBase
     [Header("State Setting")]
     public int hp = 3;
 
+    // Var for Patrol
+    Vector3 patrolPos = Vector3.zero;
+    float patrolCycleTime = 0.0f;
+    public float patrolSpeed = 3f;
+
     // Var for Runaway
     //bool isAttacked = false;
     Vector3 runPos = Vector3.zero;
     float runawayTime = 0.0f;
     public float runSpeed = 5f;
-
-    // Var for Patrol
-    Vector3 patrolPos = Vector3.zero;
-    float patrolCycleTime = 0.0f;
-    public float patrolSpeed = 3f;
 
     public override void Start()
     {
