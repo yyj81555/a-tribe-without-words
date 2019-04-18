@@ -11,12 +11,12 @@ public class EnemyQuarryAI : EnemyAIBase
     [Header("State Setting")]
     public int hp = 3;
 
-    // Var for Patrol
+    // 추격에 대한 변수
     Vector3 patrolPos = Vector3.zero;
     float patrolCycleTime = 0.0f;
     public float patrolSpeed = 3f;
 
-    // Var for Runaway
+    // 도망에 대한 변수
     //bool isAttacked = false;
     Vector3 runPos = Vector3.zero;
     float runawayTime = 0.0f;
@@ -40,6 +40,7 @@ public class EnemyQuarryAI : EnemyAIBase
         }
 
         agent.SetDestination(patrolPos);
+        LookToward(patrolPos);
         agent.speed = patrolSpeed;
     }
 
@@ -50,6 +51,7 @@ public class EnemyQuarryAI : EnemyAIBase
         // 공격한 개체로부터 반대 방향으로 도주
         //agent.SetDestination(runPos);
         agent.Move(runPos * Time.deltaTime);
+        LookToward(runPos);
         agent.speed = runSpeed;
 
         // 일정시간동안 도주하면 다시 정찰상태로 변경
