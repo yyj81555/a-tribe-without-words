@@ -9,8 +9,16 @@ public class EnemyTribeAI : EnemyAIBase
     // EnemyAIBase로 부터 상속받는 변수 확인할 것.
     // ...
 
+    public enum EnmyTribeType
+    {
+        SOLDIER,  // 전사
+        SHAMAN    // 주술사
+    }
+
     [Header("State Setting")]
     public int hp = 20;
+    public EnmyTribeType tribeType = EnmyTribeType.SOLDIER;  // 적 부족 종류
+
 
     // 정찰에 대한 변수
     public GameObject[] waypoints;  // 정찰하는 지점
@@ -24,7 +32,8 @@ public class EnemyTribeAI : EnemyAIBase
 
     // 공격에 대한 변수
     public float attackPower = 3;
-    float attackTime = 0f;
+    private float attackTime = 0f;
+    private float attackCycleTime;  // 공격 사이클
     const float attackRange = 8f;   // 공격 사정거리
 
     public override void Start()
@@ -32,6 +41,19 @@ public class EnemyTribeAI : EnemyAIBase
         base.Start();
 
         targets = new List<GameObject>();
+
+        // 적 부족타입에 따라 다르게 처리
+        switch (tribeType)
+        {
+            case EnmyTribeType.SOLDIER:
+                hp = 10;
+                attackCycleTime = 2f;
+                break;
+            case EnmyTribeType.SHAMAN:
+                hp = 20;
+                attackCycleTime = 4f;
+                break;
+        }
     }
     #region AI 행동들
     protected override void Patrol()
@@ -90,12 +112,21 @@ public class EnemyTribeAI : EnemyAIBase
         LookToward(targets[0].transform.position);
 
         attackTime += Time.deltaTime;
-        if (attackTime > 2f) // 2초마다 공격
+        if (attackTime > attackCycleTime) // 2초마다 공격
         {
-            Debug.Log("공격");
             attackTime = 0.0f;
             // target.GetComponent<???>().workerHp -= attackPower;
-            // 혹은 공격받았을때 호출되는 함수 호출
+            // 위와같이 공격받았을때 호출되는 함수 호출
+
+            // 부족 타입에 따라 다른 공격 처리
+            if (tribeType == EnmyTribeType.SOLDIER)
+            {
+                Attack_Soldier();
+            }
+            else if (tribeType == EnmyTribeType.SHAMAN)
+            {
+                Attack_Shaman();
+            }
         }
     }
 
@@ -151,4 +182,13 @@ public class EnemyTribeAI : EnemyAIBase
         }
     }
 
+    private void Attack_Soldier()
+    {
+        Debug.Log("전사 공격");
+    }
+
+    private void Attack_Shaman()
+    {
+        Debug.Log("샤먼 공격");
+    }
 }
