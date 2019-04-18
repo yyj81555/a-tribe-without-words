@@ -11,17 +11,17 @@ public class EnemyAnimalAI : EnemyAIBase
     [Header("State Setting")]
     public int hp = 10;
 
-    // 정찰에 대한 변수
+    // Var for patrol
     public GameObject[] waypoints;  // 정찰하는 지점
     private int waypointIndex = 0;
     public float patrolSpeed = 3f;
     float waypntLeftDist = 4f; // waypoint까지 남은 거리
 
-    // 추격에 대한 변수
+    // Var for chase
     public float chaseSpeed = 5f;
     private List<GameObject> targets;
 
-    // 공격에 대한 변수
+    // Var for Attack
     public float attackPower = 1;
     float attackTime = 0f;
     float attackRange = 3f;
@@ -40,7 +40,6 @@ public class EnemyAnimalAI : EnemyAIBase
         if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].transform.position) >= waypntLeftDist)
         {
             agent.SetDestination(waypoints[waypointIndex].transform.position);
-            LookToward(waypoints[waypointIndex].transform.position);
         }
         // waypoint에 도달한 경우
         else if(Vector3.Distance(this.transform.position, waypoints[waypointIndex].transform.position) < waypntLeftDist)
@@ -54,7 +53,7 @@ public class EnemyAnimalAI : EnemyAIBase
         }
         else
         {
-            Debug.Log("정찰 오류");
+            Debug.Log("???");
         }
     }
 
@@ -62,8 +61,7 @@ public class EnemyAnimalAI : EnemyAIBase
     {
         agent.speed = chaseSpeed;
         agent.SetDestination(targets[0].transform.position);   // 첫번째로 등록된 타겟을 쫓는다.
-        LookToward(targets[0].transform.position);
-
+        
         // 공격 사정거리에 달했다면 공격한다.
         if (Vector3.Distance(this.transform.position, targets[0].transform.position) <= attackRange)
         {
@@ -71,7 +69,6 @@ public class EnemyAnimalAI : EnemyAIBase
         }
     }
 
-    // 일꾼을 방해한다.
     protected override void Attack()
     {
         // 공격하기에 너무 멀다면 다시 쫓아간다. (탐지영역을 벗어날 정도로 멀면 OnTriggerExit에서 정찰상태가 된다.)
@@ -83,7 +80,7 @@ public class EnemyAnimalAI : EnemyAIBase
         attackTime += Time.deltaTime;
         if(attackTime > 3f) // 3초마다 공격
         {
-            Debug.Log("worker 방해");
+            Debug.Log("worker 공격");
             attackTime = 0.0f;
             // target.GetComponent<???>().workerHp -= attackPower;
             // 혹은 공격받았을때 호출되는 함수 호출

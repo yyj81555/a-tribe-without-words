@@ -13,7 +13,7 @@ public class EnemyAIBase : MonoBehaviour
     public enum State
     {
         PATROL,   // 정찰
-        CHASE,    // 추격
+        CHASE,    // 쫓기
         ATTACK,   // 공격
         PLUNDER,  // 약탈
         RUNAWAY,  // 도망
@@ -28,14 +28,6 @@ public class EnemyAIBase : MonoBehaviour
     // AI 상태 변수
     public State state;
     protected bool alive;
-
-
-    // 회전을 위한 변수
-    private float rotationSpeed = 1.5f;
-
-    // Pause, Resume을 위한 변수
-    protected Vector3 lastAgentVelocity;
-    protected NavMeshPath lastAgentPath;
 
     // 모든 개체들은 아래와 같은 과정을 거친다.
     public virtual void Start()
@@ -83,7 +75,6 @@ public class EnemyAIBase : MonoBehaviour
             yield return null;
         }
     }
-    #region AI 행동들
 
     virtual protected void Patrol()
     {
@@ -114,34 +105,5 @@ public class EnemyAIBase : MonoBehaviour
     virtual protected void Die()
     {
         alive = false;
-    }
-
-    #endregion
-
-
-    /* AI가 다 가져야 하는 함수 */
-
-    // 현재위치에서 target 방향으로 회전한다. 
-    protected void LookToward(Vector3 targetPosition)
-    {
-        Vector3 _direction = (targetPosition - transform.position).normalized;
-        Quaternion _lookRotation = Quaternion.LookRotation(_direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
-    }
-
-    // agent 움직임 정지
-    protected void PauseMove()
-    {
-        lastAgentVelocity = agent.velocity;
-        lastAgentPath = agent.path;
-        agent.velocity = Vector3.zero;
-        agent.ResetPath();
-    }
-
-    // agent 움직임 재개
-    protected void ResumeMove()
-    { 
-        agent.velocity = lastAgentVelocity;
-        agent.SetPath(lastAgentPath);
     }
 }
