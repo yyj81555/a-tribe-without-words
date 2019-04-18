@@ -31,7 +31,7 @@ public class EnemyAIBase : MonoBehaviour
 
 
     // 회전을 위한 변수
-    private float rotationSpeed = 1.5f;
+    private float rotationSpeed = 2f;
 
     // Pause, Resume을 위한 변수
     protected Vector3 lastAgentVelocity;
@@ -140,7 +140,7 @@ public class EnemyAIBase : MonoBehaviour
 
     // agent 움직임 재개
     protected void ResumeMove()
-    { 
+    {
         agent.velocity = lastAgentVelocity;
         agent.SetPath(lastAgentPath);
     }
