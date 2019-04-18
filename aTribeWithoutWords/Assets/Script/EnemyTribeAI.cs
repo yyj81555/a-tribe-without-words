@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-// 공격하는 적 부족
+// 공격하는 적 부족(일꾼 공격, 방해)
 public class EnemyTribeAI : EnemyAIBase
 {
     // EnemyAIBase로 부터 상속받는 변수 확인할 것.
