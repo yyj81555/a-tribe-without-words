@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// 방해하는 동물
+// 방해하는 동물(식량 탈취)
 public class EnemyAnimalAI : EnemyAIBase
 {
     // EnemyAIBase로 부터 상속받는 변수 확인할 것.
