@@ -7,17 +7,15 @@ using UnityStandardAssets.Characters.ThirdPerson;
 // 공통적인 적 AI 설계. 
 // 상속시킬 변수, 메서드 정의.
 [RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(Rigidbody))]
 public class EnemyAIBase : MonoBehaviour
 {
     public enum State
     {
-        PATROL,   // 정찰
-        CHASE,    // 쫓기
-        ATTACK,   // 공격
-        PLUNDER,  // 약탈
-        RUNAWAY,  // 도망
-        DIE       // 사망
+        PATROL,
+        CHASE,
+        ATTACK,
+        RUNAWAY,
+        DIE
     }
 
     public NavMeshAgent agent;
@@ -62,9 +60,6 @@ public class EnemyAIBase : MonoBehaviour
                 case State.ATTACK:
                     Attack();
                     break;
-                case State.PLUNDER:
-                    Plunder();
-                    break;
                 case State.RUNAWAY:
                     Runaway();
                     break;
@@ -88,11 +83,6 @@ public class EnemyAIBase : MonoBehaviour
     }
 
     virtual protected void Attack()
-    {
-        Debug.Log("자식 스크립트에서 함수가 호출되어져야 한다.");
-    }
-
-    virtual protected void Plunder()
     {
         Debug.Log("자식 스크립트에서 함수가 호출되어져야 한다.");
     }

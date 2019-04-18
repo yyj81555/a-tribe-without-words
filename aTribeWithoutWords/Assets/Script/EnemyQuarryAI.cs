@@ -48,11 +48,9 @@ public class EnemyQuarryAI : EnemyAIBase
         runawayTime += Time.deltaTime;
 
         // 공격한 개체로부터 반대 방향으로 도주
-        //agent.SetDestination(runPos);
-        agent.Move(runPos * Time.deltaTime);
+        agent.SetDestination(runPos);
         agent.speed = runSpeed;
 
-        // 일정시간동안 도주하면 다시 정찰상태로 변경
         if(runawayTime > 5f)
         {
             state = State.PATROL;
@@ -82,7 +80,6 @@ public class EnemyQuarryAI : EnemyAIBase
 
         // 공격한 개체의 위치로부터 반대 위치 계산
         /* Y 위치때문에 문제 생길수도 있는데 일단 보류 */
-        //runPos = this.transform.position + Vector3.Normalize(attackerPos - this.transform.position) * -10f;
         runPos = Vector3.Normalize(attackerPos - this.transform.position) * -10f;
 
         if (hp <= 0)
