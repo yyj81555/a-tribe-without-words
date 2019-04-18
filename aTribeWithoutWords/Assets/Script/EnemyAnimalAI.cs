@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// 공격하는 동물
+// 방해하는 동물
 public class EnemyAnimalAI : EnemyAIBase
 {
     // EnemyAIBase로 부터 상속받는 변수 확인할 것.
@@ -19,11 +19,18 @@ public class EnemyAnimalAI : EnemyAIBase
 
     // Var for chase
     public float chaseSpeed = 5f;
-    private GameObject target;
+    private List<GameObject> targets;
+
+    // Var for Attack
+    public float attackPower = 1;
+    float attackTime = 0f;
+    float attackRange = 3f;
 
     public override void Start()
     {
         base.Start();
+
+        targets = new List<GameObject>();
     }
 
     protected override void Patrol()
@@ -42,7 +49,7 @@ public class EnemyAnimalAI : EnemyAIBase
             {
                 waypointIndex = 0;
             }
-            Debug.Log("다음 지점으로 이동");
+            Debug.Log("다음 정찰지점으로 이동");
         }
         else
         {
@@ -53,10 +60,10 @@ public class EnemyAnimalAI : EnemyAIBase
     protected override void Chase()
     {
         agent.speed = chaseSpeed;
-        agent.SetDestination(target.transform.position);
-
-        // 타겟의 주변에 도착했다면
-        if(Vector3.Distance(this.transform.position, target.transform.position) <= 3f)
+        agent.SetDestination(targets[0].transform.position);   // 첫번째로 등록된 타겟을 쫓는다.
+        
+        // 공격 사정거리에 달했다면 공격한다.
+        if (Vector3.Distance(this.transform.position, targets[0].transform.position) <= attackRange)
         {
             state = State.ATTACK;
         }
@@ -64,11 +71,19 @@ public class EnemyAnimalAI : EnemyAIBase
 
     protected override void Attack()
     {
-
-        // 타겟이 
-        if (Vector3.Distance(this.transform.position, target.transform.position) > 3f)
+        // 공격하기에 너무 멀다면 다시 쫓아간다. (탐지영역을 벗어날 정도로 멀면 OnTriggerExit에서 정찰상태가 된다.)
+        if (Vector3.Distance(this.transform.position, targets[0].transform.position) > attackRange)
         {
             state = State.CHASE;
+        }
+
+        attackTime += Time.deltaTime;
+        if(attackTime > 3f) // 3초마다 공격
+        {
+            Debug.Log("worker 공격");
+            attackTime = 0.0f;
+            // target.GetComponent<???>().workerHp -= attackPower;
+            // 혹은 공격받았을때 호출되는 함수 호출
         }
     }
 
@@ -83,17 +98,19 @@ public class EnemyAnimalAI : EnemyAIBase
 
     }
 
-    // worker를 탐지하면 쫓아가도록 테스트.
+    /*Enter와 Exit에서 유의할점은 해당 이벤트가 발생할때만 아래 처리를 한다는 것이다.
+       만일 콜라이더내에 머무는 동안 Enemy가 공격하여 worker가 사라진다면 Exit이벤트는 발생하지 않는다.*/
+
+    // detector콜라이더에 worker가 탐지되면 쫓아감.
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "worker")
         {
-            // 추격하는 중에는 다른 개체를 추격하지 않는다.
-            if (state != State.CHASE)
+            // 타겟리스트에 저장되어 있지 않다면 저장
+            if (!(targets.Contains(other.gameObject)))
             {
-                target = other.gameObject;
+                targets.Add(other.gameObject);
                 state = State.CHASE;
-                Debug.Log("잡아라!");
             }
         }
     }
@@ -103,9 +120,18 @@ public class EnemyAnimalAI : EnemyAIBase
     {
         if(other.tag == "worker")
         {
-            // 탐지영역에서 사라진 개체가 target이라면
-            if (target == other.gameObject)
-                state = State.PATROL;
+            // 타겟 리스트에 포함되어 있다면 타겟에서 제외한다.
+            if (targets.Contains(other.gameObject))
+            {
+                targets.Remove(other.gameObject);
+
+                // 남아있는 타겟이 없다면 정찰상태로 변경
+                // 남아있는 타겟이 있었다면 자동으로 추격할 것이다. target[0]에 Queue처럼 새로운 놈이 들어감.
+                if (targets.Count == 0)
+                {
+                    state = State.PATROL;
+                }
+            }
         }
     }
 }
