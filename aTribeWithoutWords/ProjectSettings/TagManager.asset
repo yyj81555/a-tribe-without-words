@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - worker
+  - Worker
+  - FruitFarm
+  - Mine
   layers:
   - Default
   - TransparentFX
