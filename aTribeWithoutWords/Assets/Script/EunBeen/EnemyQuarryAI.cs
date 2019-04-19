@@ -17,7 +17,6 @@ public class EnemyQuarryAI : EnemyAIBase
     public float patrolSpeed = 3f;
 
     // 도망에 대한 변수
-    //bool isAttacked = false;
     Vector3 runPos = Vector3.zero;
     float runawayTime = 0.0f;
     public float runSpeed = 5f;
@@ -100,7 +99,7 @@ public class EnemyQuarryAI : EnemyAIBase
     // 공격당하는 것을 충돌로 간주하고 테스트
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "worker")
+        if(collision.gameObject.tag == "Worker")
         {
             AttackedByWorker(collision.gameObject.transform.position);
         }
