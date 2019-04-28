@@ -113,6 +113,7 @@ public class EnemyAIBase : MonoBehaviour
 
     virtual protected void Die()
     {
+        Debug.Log(this.gameObject.name + " 죽음");
         alive = false;
     }
 

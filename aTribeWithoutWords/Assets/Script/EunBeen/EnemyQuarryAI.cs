@@ -67,17 +67,11 @@ public class EnemyQuarryAI : EnemyAIBase
         Destroy(this.gameObject);
     }
 
-    // 공격당하면 호출
+    // 공격당하면 호출(Worker가 공격했을때 호출됨)
     public void AttackedByWorker(Vector3 attackerPos)
     {
-        if(hp <= 0)
-        {
-            hp = 0;
-        }
-        else
-        {
-            hp -= 1;
-        }
+        if (hp <= 0) { hp = 0; }
+        else { hp -= 1; }
 
         runawayTime = 0.0f;
 
@@ -93,15 +87,6 @@ public class EnemyQuarryAI : EnemyAIBase
         else
         {
             state = State.RUNAWAY;
-        }
-    }
-
-    // 공격당하는 것을 충돌로 간주하고 테스트
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Worker")
-        {
-            AttackedByWorker(collision.gameObject.transform.position);
         }
     }
 }

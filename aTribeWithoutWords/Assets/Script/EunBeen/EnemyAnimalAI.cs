@@ -24,7 +24,7 @@ public class EnemyAnimalAI : EnemyAIBase
     // 공격에 대한 변수
     public float attackPower = 1;
     float attackTime = 0f;
-    float attackRange = 3f;
+    float attackRange = 1.5f;
 
     public override void Start()
     {
@@ -77,8 +77,13 @@ public class EnemyAnimalAI : EnemyAIBase
         // 공격하기에 너무 멀다면 다시 쫓아간다. (탐지영역을 벗어날 정도로 멀면 OnTriggerExit에서 정찰상태가 된다.)
         if (Vector3.Distance(this.transform.position, targets[0].transform.position) > attackRange)
         {
+            //ResumeMove();
             state = State.CHASE;
         }
+
+        // 멈춰서 공격
+        //PauseMove();
+        LookToward(targets[0].transform.position);
 
         attackTime += Time.deltaTime;
         if(attackTime > 3f) // 3초마다 공격
