@@ -64,7 +64,7 @@ public class EnemyTribeAI : EnemyAIBase
         {
             agent.SetDestination(waypoints[waypointIndex].transform.position);
             LookToward(waypoints[waypointIndex].transform.position);
-            Debug.Log("정찰중");
+            //Debug.Log("정찰중");
         }
         // waypoint에 도달한 경우
         else if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].transform.position) < waypntLeftDist)
@@ -74,7 +74,7 @@ public class EnemyTribeAI : EnemyAIBase
             {
                 waypointIndex = 0;
             }
-            Debug.Log("다음 정찰지점으로 이동");
+            //Debug.Log("다음 정찰지점으로 이동");
         }
         else
         {
@@ -112,7 +112,7 @@ public class EnemyTribeAI : EnemyAIBase
         LookToward(targets[0].transform.position);
 
         attackTime += Time.deltaTime;
-        if (attackTime > attackCycleTime) // 2초마다 공격
+        if (attackTime > attackCycleTime)
         {
             attackTime = 0.0f;
             // target.GetComponent<???>().workerHp -= attackPower;
@@ -126,6 +126,8 @@ public class EnemyTribeAI : EnemyAIBase
             else if (tribeType == EnmyTribeType.SHAMAN)
             {
                 Attack_Shaman();
+                // 샤먼의 바보만들기 공격
+                targets[0].GetComponent<NPCMove>().npcstate = NPCMove.NPCState.IDIOT_STATE;
             }
         }
     }
