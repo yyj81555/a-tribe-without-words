@@ -684,7 +684,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 577696369}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1069892166}
@@ -717,7 +717,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.5
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: d863673c6f3eb204eb464b17d0cbad36, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 139b84b91d5721146b1e580dfda3b892, type: 2}
 --- !u!1 &609389628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1211,18 @@ Prefab:
       propertyPath: m_Name
       value: Quarry_Rabbit
       objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 6614ff659bd0f8649855233ced6ee1f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 6614ff659bd0f8649855233ced6ee1f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6614ff659bd0f8649855233ced6ee1f2, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6614ff659bd0f8649855233ced6ee1f2, type: 3}
   m_IsPrefabParent: 0
@@ -1399,7 +1411,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: b706297ad75b80b4aa46611e4f4ccaa2, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 59fbaddbdfb482c4eb5a103b8ffb6522, type: 2}
 --- !u!4 &1617898002
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,7 +1419,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1617898000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1069892166}
@@ -1485,18 +1497,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 4801090883198068, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4801090883198068, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4801090883198068, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114186082760282262, guid: c2b6db8a62b06c24384a95fa19213509,
         type: 2}
       propertyPath: waypoints.Array.data[0]
@@ -1507,6 +1507,18 @@ Prefab:
       propertyPath: waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 2054238684}
+    - target: {fileID: 1391936145745548, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1612786942351510, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920779672451482, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
   m_IsPrefabParent: 0
@@ -1587,10 +1599,13 @@ Prefab:
       propertyPath: waypoints.Array.data[1]
       value: 
       objectReference: {fileID: 2054238684}
-    - target: {fileID: 114621678033730612, guid: 7f06487a980465f42966d9e4cfcce28a,
-        type: 2}
-      propertyPath: tribeType
-      value: 0
+    - target: {fileID: 1875907570584254, guid: 7f06487a980465f42966d9e4cfcce28a, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210375177119742, guid: 7f06487a980465f42966d9e4cfcce28a, type: 2}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f06487a980465f42966d9e4cfcce28a, type: 2}

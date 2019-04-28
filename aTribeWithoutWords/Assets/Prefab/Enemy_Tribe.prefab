@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 54622410845028936}
   - component: {fileID: 195722289782121134}
   - component: {fileID: 114621678033730612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy_Tribe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
