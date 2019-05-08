@@ -107,7 +107,6 @@ public class EnemyTribeAI : EnemyAIBase
         }
 
         // 멈춰서 공격
-        //agent.SetDestination(transform.position); /* 임시방편으로 했는데 잘됨 ? */
         PauseMove();
         LookToward(targets[0].transform.position);
 
