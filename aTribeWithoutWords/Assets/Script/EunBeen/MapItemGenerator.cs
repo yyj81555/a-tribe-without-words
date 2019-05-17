@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/* 돌을 동적으로 생성하면 NavMesh에서 문제생길 가능성이 높음. */
 // 맵에 아이템 생성 및 관리
 public class MapItemGenerator : MonoBehaviour {
 
@@ -28,7 +27,7 @@ public class MapItemGenerator : MonoBehaviour {
         }
     }
 
-    // 생성 오브젝트
+    // 생산되는 오브젝트
     [SerializeField] GameObject fruitObj;
     [SerializeField] GameObject stoneObj;
 
@@ -38,9 +37,9 @@ public class MapItemGenerator : MonoBehaviour {
     private float fruitTime = 0;
     private float stoneTime = 0;
 
-    // 아이템 생성 위치
+    // 아이템 생성시키는 오브젝트
     public List<FruitTree> fruitFarms;  // 열매나무
-    public List<Stone> stones; // 돌 생성 위치
+    public List<Mine> mines; // 바위
 
     // 맵에 생성될 수 있는 최대 아이템 개수
     private const int fruitMax = 5;  // 한 나무당 과일 개수
@@ -59,11 +58,11 @@ public class MapItemGenerator : MonoBehaviour {
             fruitFarms.Add(farmObjs[i].AddComponent<FruitTree>());
         }
 
-        // 맵에 존재하는 Mine 태그 오브젝트들을 찾아 Stone 스크립트 추가
-        GameObject[] stoneObjs = GameObject.FindGameObjectsWithTag("Mine");
-        for (int i = 0; i < stoneObjs.Length; i++)
+        // 맵에 존재하는 Mine 태그 오브젝트들을 찾아 Mine 스크립트 추가
+        GameObject[] mineObjs = GameObject.FindGameObjectsWithTag("Mine");
+        for (int i = 0; i < mineObjs.Length; i++)
         {
-            stones.Add(stoneObjs[i].AddComponent<Stone>());
+            mines.Add(mineObjs[i].AddComponent<Mine>());
         }
     }
 
@@ -84,13 +83,13 @@ public class MapItemGenerator : MonoBehaviour {
         
         if (stoneTime > createStoneSycle)
         {
-            // 랜덤한 돌을 캘 수 있는 상태로 만든다.
-            int rand = Random.Range(0, stones.Count);
-            if (!stones[rand].IsStoneExist())
+            // 랜덤한 광산을 캘 수 있는 상태로 만든다.
+            int rand = Random.Range(0, mines.Count);
+            if (!mines[rand].IsStoneExist())
             {
-                stones[rand].SetStoneGettable();
+                mines[rand].SetStoneGettable();
                 stoneTime = 0f;
-                Debug.Log(stones[rand].gameObject.name + " 이용가능");
+                Debug.Log(mines[rand].gameObject.name + " 이용가능");
             }
         }
 	}

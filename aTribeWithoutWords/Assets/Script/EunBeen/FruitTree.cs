@@ -33,6 +33,12 @@ public class FruitTree : MonoBehaviour {
     // 열매를 딴다.  (일꾼이 열매를 딸 때 사용하는 함수)
     public GameObject GetFruit()
     {
+        if(fruits.Count == 0)
+        {
+            Debug.Log("따야할 열매가 없습니다.");
+            return null;
+        }
+
         GameObject getObj = fruits[-1];
         fruits.RemoveAt(-1);
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -283,6 +283,10 @@ Prefab:
       propertyPath: m_TagString
       value: Mine
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
+      propertyPath: m_Name
+      value: Mine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
   m_IsPrefabParent: 0
@@ -446,6 +450,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &541625551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 541625552}
+  m_Layer: 0
+  m_Name: StoredItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &541625552
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 541625551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.246, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1405343397}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &563459456
 Prefab:
   m_ObjectHideFlags: 0
@@ -503,8 +535,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_Name
-      value: Stone3
+      value: Mine3
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
   m_IsPrefabParent: 0
@@ -918,7 +954,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_Name
-      value: Stone2
+      value: Mine2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
@@ -1032,10 +1068,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitObj: {fileID: 1183197374826626, guid: 2177b6a7de2c96f4789cd495aabd8941, type: 2}
+  stoneObj: {fileID: 1497077407197532, guid: e20ede1a12bc1444ba8938cd7269a0aa, type: 2}
   createFruitSycle: 2
   createStoneSycle: 2
   fruitFarms: []
-  stones: []
+  mines: []
 --- !u!4 &845529021
 Transform:
   m_ObjectHideFlags: 0
@@ -1554,8 +1591,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e806a199252724da3dc0ee206cbe12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fruit: 0
-  stone: 0
+  storedFruitObjs: []
+  storedStoneObjs: []
+--- !u!4 &1405343397 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400006, guid: e313bb1da9a4cda42b39bcd2bc5d1a3b, type: 3}
+  m_PrefabInternal: {fileID: 1405343393}
 --- !u!1 &1588783021
 GameObject:
   m_ObjectHideFlags: 0
