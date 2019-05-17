@@ -540,7 +540,7 @@ Prefab:
     - target: {fileID: 2300000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
+      objectReference: {fileID: 2100000, guid: 8434c249ea15b0540a14fddcb552ac7a, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
   m_IsPrefabParent: 0
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.5
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 5148060af7e76ed4ca8e1e78e15f6b61, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c9089fd1794b63442a18ce45a3dabbc2, type: 2}
 --- !u!1 &609389628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1668,7 +1668,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
-  m_NavMeshData: {fileID: 23800000, guid: 51ca24718d2276841bd884d2e912d579, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 6f9a01cadc6bedf4fadbbe1c3610adde, type: 2}
 --- !u!4 &1617898002
 Transform:
   m_ObjectHideFlags: 0

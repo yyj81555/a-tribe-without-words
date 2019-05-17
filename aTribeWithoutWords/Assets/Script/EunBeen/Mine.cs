@@ -7,23 +7,35 @@ public class Mine : MonoBehaviour {
     // 돌을 캘 수 있는가?
     [SerializeField] bool isStoneExist;
 
-    // 빛나는 쉐이더 변수
-    // 
+    // 매터리얼을 위한 변수
+    public float speed = 1.0f;
+    Color startColor;
+    Color endColor;
+    float startTime;
 
 	void Start () {
         isStoneExist = false;
+        startColor = GetComponent<Renderer>().material.color;
+        endColor = new Color(0.7f, 0.7f, 0);
+        speed = 1f;
     }
 
-    // 돌을 캘수있다면 반짝반짝 빛나게한다.
+    private void Update()
+    {
+        BrightMine();
+    }
+
+    // 돌을 캘수있다면 반짝반짝 빛나게한다. /* 현재는 노랑색으로만 바꾸었음.. */
     private void BrightMine()
     {
         if (isStoneExist)
         {
-            // 쉐이더 온
+            float t = Mathf.Sin(Time.time - startTime) * speed;
+            GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
         }
         else
         {
-            // 쉐이더 오프
+            GetComponent<Renderer>().material.color = startColor;
         }
     }
 
@@ -36,7 +48,8 @@ public class Mine : MonoBehaviour {
     public void SetStoneGettable()
     {
         isStoneExist = true;
-        BrightMine();
+        //BrightMine();
+        startTime = Time.time;
     }
 
     // 채석한다.  (일꾼이 채석할때 사용하는 함수)
