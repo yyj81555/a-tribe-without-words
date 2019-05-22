@@ -9,11 +9,6 @@ public class Variable : MonoBehaviour
     public List<GameObject> selectnpc;
     public int selectnpc_count = 0;
 
-    //게임 오브젝트들
-    public int Fruit = 0;
-    public int Stone = 0;
-
-
     //최대 수집양
     public int MAX_Fruit = 5;
     public int MAX_Stone = 10;

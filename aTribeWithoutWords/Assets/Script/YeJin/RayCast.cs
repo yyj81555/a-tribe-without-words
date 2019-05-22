@@ -11,7 +11,8 @@ public class RayCast : MonoBehaviour
 	private float rayLength; //rayCast 길이
     public string hitname = null; //검출된 타켓의 이름
 
-	Variable variable; //아이템 변수 스크립트 (feat.가방)
+	Variable variable; // 변수 제어 스크립트
+	Item item; // 아이템 창
     NPCMove npcmove; //npc 스크립트
 
     public GameObject prefab; //느낌표 프리팹
@@ -21,6 +22,7 @@ public class RayCast : MonoBehaviour
     void Start()
     {
         variable = Itemlist.GetComponent<Variable>();
+		item = Itemlist.GetComponent<Item> ();
     }
 
     // Update is called once per frame
@@ -59,9 +61,8 @@ public class RayCast : MonoBehaviour
 					for (int i = 0; i < variable.selectnpc_count; i++) {
 						npcmove = variable.selectnpc [i].GetComponent<NPCMove> ();
 
-						//현재 사용자를 따라오는 상태라면 FRUIT_RICKING, COMMAND_STATE 상태로 변경한다. 
-						if (npcmove.npcstate == NPCMove.NPCState.FOLLOW_PLAYER) {
-							npcmove.commandstate = NPCMove.CommandState.FRUIT_PICKING;
+						//현재 사용자를 따라오는 상태라면 COMMAND_STATE 상태로 변경한다. 
+						if (npcmove.npcstate == NPCMove.NPCState.FOLLOW_PLAYER && npcmove.commandstate == NPCMove.CommandState.FRUIT_PICKING) {
 							npcmove.npcstate = NPCMove.NPCState.COMMAND_STATE;
 
 							npcmove.target = hit.transform.gameObject; //npc가 추적하는 target을 넘겨준다.
@@ -102,7 +103,7 @@ public class RayCast : MonoBehaviour
 				else if (hit.transform.gameObject.tag == "Small_Animal") 
 				{
 					//수행인원과 돌개수를 확인하여 적절하지 않다면 초기로 돌린다.
-					if (variable.selectnpc_count >= variable.Hit_Small_Animal_NPCCount || variable.Stone < variable.Hit_Small_Animal_Stone) {
+					if (variable.selectnpc_count >= variable.Hit_Small_Animal_NPCCount || item.Stone < variable.Hit_Small_Animal_Stone) {
 						Debug.Log ("수행인원이 너무 많거나 돌이 부족합니다.");
 
 						int imsi_count = variable.selectnpc_count;
