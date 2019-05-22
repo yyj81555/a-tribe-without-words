@@ -11,7 +11,7 @@ public class EnemyQuarryAI : EnemyAIBase
     [Header("State Setting")]
     public int hp = 3;
 
-    // 추격에 대한 변수
+    // 정찰에 대한 변수
     Vector3 patrolPos = Vector3.zero;
     float patrolCycleTime = 0.0f;
     public float patrolSpeed = 0.5f;
