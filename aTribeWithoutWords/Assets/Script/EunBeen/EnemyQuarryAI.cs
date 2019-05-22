@@ -14,12 +14,12 @@ public class EnemyQuarryAI : EnemyAIBase
     // 정찰에 대한 변수
     Vector3 patrolPos = Vector3.zero;
     float patrolCycleTime = 0.0f;
-    public float patrolSpeed = 3f;
+    public float patrolSpeed = 0.5f;
 
     // 도망에 대한 변수
     Vector3 runPos = Vector3.zero;
     float runawayTime = 0.0f;
-    public float runSpeed = 5f;
+    public float runSpeed = 2f;
 
     public override void Start()
     {

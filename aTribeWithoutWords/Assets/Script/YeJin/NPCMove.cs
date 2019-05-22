@@ -14,7 +14,7 @@ public class NPCMove : MonoBehaviour
     private GameObject Player;
 
     //RayCast raycast;
-    float Target_Distance = 1f; //채집 타겟과의 거리
+    float Target_Distance = 2f; //채집 타겟과의 거리
 	float Small_Animal_Distance = 4f; //작은동물 사냥 가능거리
     float Player_Distance = 2.5f; //플레이어 따라올때 멈추는 거리
 
@@ -47,7 +47,8 @@ public class NPCMove : MonoBehaviour
 
 	public GameObject Itemlist; //아이템 변수들을 가지고 있는 오브젝트(feat. 가방)
     public GameObject Main_Camera; 
-	Variable variable; //아이템 변수 스크립트 (feat.가방)
+	Variable variable; // 변수 제어 스크립트
+	Item item; // 아이템 창
     private bool alive; // 코루틴 변수
 
 	public GameObject target; //선택된 타겟
@@ -64,6 +65,7 @@ public class NPCMove : MonoBehaviour
     {
         //raycast = Main_Camera.GetComponent<RayCast>();
         variable = Itemlist.GetComponent<Variable>();
+		item = Itemlist.GetComponent<Item> ();
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false; //true : 목적지에 다가갈수록 속도가 빨라진다. false : 속도가 일정하다.
         agent.updatePosition = true; // position값을 업데이트한다.
@@ -228,7 +230,7 @@ public class NPCMove : MonoBehaviour
     public void Fruit_Gathering()
     {
 		//과일개수가 최대저장 개수보다 많은경우 자유이동으로 변경
-        if (variable.Fruit >= variable.MAX_Fruit)
+		if (item.Fruit >= variable.MAX_Fruit)
         {
             StandardMode();
         }
@@ -238,7 +240,7 @@ public class NPCMove : MonoBehaviour
         {
             if (Instruction_time >= variable.Fruit_Picking_Time)
             {
-                variable.Fruit++;
+                item.Fruit++;
                 Instruction_time = 0;
             }
             else
@@ -252,7 +254,7 @@ public class NPCMove : MonoBehaviour
     public void Stone_Gathering()
     {
 		//돌개수가 최대 돌 소유 개수보다 많은경우 자유이동으로 변경
-		if (variable.Stone >= variable.MAX_Stone)
+		if (item.Stone >= variable.MAX_Stone)
 		{
 			StandardMode();
 		}
@@ -262,7 +264,7 @@ public class NPCMove : MonoBehaviour
 		{
 			if (Instruction_time >= variable.Stone_Picking_Time)
 			{
-				variable.Stone++;
+				item.Stone++;
 				Instruction_time = 0;
 				StandardMode();
 			}
@@ -283,12 +285,12 @@ public class NPCMove : MonoBehaviour
 		if (Vector3.Distance (this.transform.position, target.transform.position) <= Small_Animal_Distance) {
 			if (Instruction_time >= variable.HIT_Time)
 			{
-				if (variable.Stone <= 0 || enemyquarryai.hp <= 0) {
+				if (item.Stone <= 0 || enemyquarryai.hp <= 0 || enemyquarryai == null) {
 					StandardMode();
 				} 
 
 				else {
-					variable.Stone--;
+					item.Stone--;
                     //enemyquarryai.hp--;
                     enemyquarryai.AttackedByWorker(this.transform.position);
 					Instruction_time = 0;
