@@ -8,7 +8,7 @@ public class Mine : MonoBehaviour {
     [SerializeField] bool isStoneExist;
 
     // 매터리얼을 위한 변수
-    public float speed = 1.0f;
+    public float colorChangeSpeed = 1.0f;
     Color startColor;
     Color endColor;
     float startTime;
@@ -17,7 +17,7 @@ public class Mine : MonoBehaviour {
         isStoneExist = false;
         startColor = GetComponent<Renderer>().material.color;
         endColor = new Color(0.7f, 0.7f, 0);
-        speed = 1f;
+        colorChangeSpeed = 1f;
     }
 
     private void Update()
@@ -30,7 +30,7 @@ public class Mine : MonoBehaviour {
     {
         if (isStoneExist)
         {
-            float t = Mathf.Sin(Time.time - startTime) * speed;
+            float t = Mathf.Sin(Time.time - startTime) * colorChangeSpeed;
             GetComponent<Renderer>().material.color = Color.Lerp(startColor, endColor, t);
         }
         else
