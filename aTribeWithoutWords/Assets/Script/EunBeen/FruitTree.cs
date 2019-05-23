@@ -39,8 +39,8 @@ public class FruitTree : MonoBehaviour {
             return null;
         }
 
-        GameObject getObj = fruits[-1];
-        fruits.RemoveAt(-1);
+        GameObject getObj = fruits[fruits.Count-1];
+		fruits.RemoveAt(fruits.Count-1);
 
         return getObj;
     }
