@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -265,7 +265,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_LocalScale.x
@@ -396,72 +396,6 @@ Prefab:
     - {fileID: 64120470701094744, guid: a370c0b62cbe57940b2fae987cbf9014, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a370c0b62cbe57940b2fae987cbf9014, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &396804299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 396804301}
-  - component: {fileID: 396804300}
-  - component: {fileID: 396804302}
-  m_Layer: 0
-  m_Name: ItemList
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &396804300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396804299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a192b5b7c86b748901deb99738ad6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectnpc: []
-  selectnpc_count: 0
-  MAX_Fruit: 5
-  MAX_Stone: 10
-  HIT_Time: 3
-  Fruit_Picking_Time: 2
-  Stone_Picking_Time: 4
-  Idiot_Time: 5
-  Choose_NPCCount: 2
-  Stone_NPCCount: 2
-  Hit_Small_Animal_NPCCount: 2
-  Hit_Small_Animal_Stone: 3
---- !u!4 &396804301
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396804299}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.3737445, y: 19.469614, z: -16.89775}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &396804302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396804299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a057e19a2227f0848a12e190bb769064, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Fruit: 0
-  Stone: 0
 --- !u!1 &527528279
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +440,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &541625551
 GameObject:
@@ -657,10 +591,11 @@ MonoBehaviour:
   wayPoint: []
   nextidx: 0
   Player: {fileID: 1013779146}
+  Cave: {fileID: 1405343394}
   Instruction_time: 0
   npcstate: 0
   commandstate: 0
-  Itemlist: {fileID: 396804299}
+  Itemlist: {fileID: 753114437}
   Main_Camera: {fileID: 668397955}
   target: {fileID: 0}
 --- !u!136 &573707004
@@ -704,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _Intellect: 0
-  have_Item: 
+  have_Item: {fileID: 0}
 --- !u!1 &577696369
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +821,7 @@ MonoBehaviour:
   rayLength: 100000
   hitname: 
   prefab: {fileID: 8975043716170532405, guid: 2692f5e22e2550048a8e57177d6e5507, type: 2}
-  Itemlist: {fileID: 396804299}
+  Itemlist: {fileID: 753114437}
 --- !u!1 &676462801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +961,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &753114437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 753114439}
+  - component: {fileID: 753114438}
+  m_Layer: 0
+  m_Name: variable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &753114438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 753114437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a192b5b7c86b748901deb99738ad6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectnpc: []
+  selectnpc_count: 0
+  MAX_Fruit: 5
+  MAX_Stone: 10
+  HIT_Time: 3
+  Fruit_Picking_Time: 2
+  Stone_Picking_Time: 4
+  Idiot_Time: 5
+  Choose_NPCCount: 2
+  Stone_NPCCount: 2
+  Hit_Small_Animal_NPCCount: 2
+  Hit_Small_Animal_Stone: 3
+--- !u!4 &753114439
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 753114437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.3737445, y: 19.469614, z: -16.89775}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &935879130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1073,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &982828869
 Prefab:
@@ -1158,7 +1145,7 @@ Transform:
   - {fileID: 1743231176}
   - {fileID: 299849284}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1013779146
 GameObject:
@@ -1558,10 +1545,11 @@ MonoBehaviour:
   wayPoint: []
   nextidx: 0
   Player: {fileID: 1013779146}
+  Cave: {fileID: 1405343394}
   Instruction_time: 0
   npcstate: 0
   commandstate: 0
-  Itemlist: {fileID: 396804299}
+  Itemlist: {fileID: 753114437}
   Main_Camera: {fileID: 668397955}
   target: {fileID: 0}
 --- !u!136 &1156058678
@@ -1605,7 +1593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _Intellect: 0
-  have_Item: 
+  have_Item: {fileID: 0}
 --- !u!1001 &1255045882
 Prefab:
   m_ObjectHideFlags: 0
@@ -1643,7 +1631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6614ff659bd0f8649855233ced6ee1f2, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 6614ff659bd0f8649855233ced6ee1f2, type: 3}
       propertyPath: m_LocalScale.x
@@ -1775,7 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe3d06722133f54ab867922994e578f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Itemlist: {fileID: 396804299}
+  Itemlist: {fileID: 753114437}
 --- !u!224 &1326541557
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1787,7 +1775,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2016,7 +2004,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4801090883198068, guid: c2b6db8a62b06c24384a95fa19213509, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114186082760282262, guid: c2b6db8a62b06c24384a95fa19213509,
         type: 2}
@@ -2150,7 +2138,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4937398313669106, guid: 7f06487a980465f42966d9e4cfcce28a, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114621678033730612, guid: 7f06487a980465f42966d9e4cfcce28a,
         type: 2}
@@ -2426,7 +2414,7 @@ RectTransform:
   m_Children:
   - {fileID: 1825616347}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2574,10 +2562,11 @@ MonoBehaviour:
   wayPoint: []
   nextidx: 0
   Player: {fileID: 1013779146}
+  Cave: {fileID: 1405343394}
   Instruction_time: 0
   npcstate: 0
   commandstate: 0
-  Itemlist: {fileID: 396804299}
+  Itemlist: {fileID: 753114437}
   Main_Camera: {fileID: 668397955}
   target: {fileID: 0}
 --- !u!195 &2037214843
@@ -2629,7 +2618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _Intellect: 0
-  have_Item: 
+  have_Item: {fileID: 0}
 --- !u!1 &2054238684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,7 +2712,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a001f9cef6280cf47a5f2629854065d6, type: 3}
       propertyPath: m_LocalScale.x

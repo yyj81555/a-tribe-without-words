@@ -12,12 +12,15 @@ public class NPCMove : MonoBehaviour
 
     [SerializeField]
     private GameObject Player;
+	[SerializeField]
+	private GameObject Cave;
 
     //RayCast raycast;
     float Target_Distance = 2f; //채집 타겟과의 거리
 	float Small_Animal_Distance = 4f; //작은동물 사냥 가능거리
     float Player_Distance = 2.5f; //플레이어 따라올때 멈추는 거리
-
+	float Cave_Distance = 4f;
+ 
     //NPC 상태
     public enum NPCState
     {
@@ -26,6 +29,7 @@ public class NPCMove : MonoBehaviour
         FOLLOW_PLAYER, //플레이어 따라다님
         COMMAND_STATE, //명령 이동 중
         COMMAND_EXCUTION, //명령 수행 중
+		CAVE_MOVEMENT_STATUS, //동굴 이동 상태
 		IDIOT_STATE // 멍청이 상태
     }
 
@@ -48,7 +52,8 @@ public class NPCMove : MonoBehaviour
 	public GameObject Itemlist; //아이템 변수들을 가지고 있는 오브젝트(feat. 가방)
     public GameObject Main_Camera; 
 	Variable variable; // 변수 제어 스크립트
-	Item item; // 아이템 창
+	NPCItem npcitem;
+	FruitTree fruittree;
     private bool alive; // 코루틴 변수
 
 	public GameObject target; //선택된 타겟
@@ -65,7 +70,7 @@ public class NPCMove : MonoBehaviour
     {
         //raycast = Main_Camera.GetComponent<RayCast>();
         variable = Itemlist.GetComponent<Variable>();
-		item = Itemlist.GetComponent<Item> ();
+		npcitem = this.GetComponent<NPCItem> ();
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false; //true : 목적지에 다가갈수록 속도가 빨라진다. false : 속도가 일정하다.
         agent.updatePosition = true; // position값을 업데이트한다.
@@ -119,6 +124,10 @@ public class NPCMove : MonoBehaviour
                 case NPCState.COMMAND_EXCUTION:
                     CommandExcution();
                     break;
+
+			case NPCState.CAVE_MOVEMENT_STATUS:
+					Tocavemove ();
+					break;
 
 				case NPCState.IDIOT_STATE:
 					Idiot ();
@@ -226,11 +235,32 @@ public class NPCMove : MonoBehaviour
 		}
     }
 
+	//동굴 이동 상태
+	public void Tocavemove()
+	{
+		if (agent.velocity.sqrMagnitude <= 1f * 1f && agent.remainingDistance <= Cave_Distance) {
+			if (commandstate == CommandState.FRUIT_PICKING) {
+				CaveStorage.Instance.StoreItem (npcitem.have_Item, CaveStorage.ItemType.FRUIT);
+			}
+
+			if (commandstate == CommandState.STONE_PICKING) {
+				CaveStorage.Instance.StoreItem (npcitem.have_Item, CaveStorage.ItemType.STONE);
+			}
+			StandardMode ();
+		} 
+
+		else {
+			agent.destination = Cave.transform.position;
+			LookToward(Cave.transform.position);
+			ResumeMove();
+		}
+	}
+
 	//과일채집 명령 수행
     public void Fruit_Gathering()
     {
 		//과일개수가 최대저장 개수보다 많은경우 자유이동으로 변경
-		if (item.Fruit >= variable.MAX_Fruit)
+		if (CaveStorage.Instance.storedFruitObjs.Count >= variable.MAX_Fruit)
         {
             StandardMode();
         }
@@ -240,13 +270,22 @@ public class NPCMove : MonoBehaviour
         {
             if (Instruction_time >= variable.Fruit_Picking_Time)
             {
-                item.Fruit++;
-                Instruction_time = 0;
+				fruittree = target.GetComponent<FruitTree> ();
+				npcitem.have_Item = fruittree.GetFruit ();
+				npcitem.have_Item.transform.position = Vector3.zero;
+				npcitem.have_Item.transform.parent = this.transform;
+				npcitem.have_Item.transform.localPosition = new Vector3(0, -0.04f, 0.04f);
+				npcitem.have_Item.transform.localScale = new Vector3 (1, 1, 1) * 0.2f;
+
+				Instruction_time = 0;
+				agent.destination = Cave.transform.position;
+				npcstate = NPCState.CAVE_MOVEMENT_STATUS;
             }
-            else
-            {
-                Instruction_time += Time.deltaTime;
-            }
+
+			else
+			{
+				Instruction_time += Time.deltaTime;
+			}
         }
     }
 
@@ -254,7 +293,7 @@ public class NPCMove : MonoBehaviour
     public void Stone_Gathering()
     {
 		//돌개수가 최대 돌 소유 개수보다 많은경우 자유이동으로 변경
-		if (item.Stone >= variable.MAX_Stone)
+		if (CaveStorage.Instance.storedStoneObjs.Count >= variable.MAX_Stone)
 		{
 			StandardMode();
 		}
@@ -264,7 +303,7 @@ public class NPCMove : MonoBehaviour
 		{
 			if (Instruction_time >= variable.Stone_Picking_Time)
 			{
-				item.Stone++;
+				//아이템저장
 				Instruction_time = 0;
 				StandardMode();
 			}
@@ -285,12 +324,13 @@ public class NPCMove : MonoBehaviour
 		if (Vector3.Distance (this.transform.position, target.transform.position) <= Small_Animal_Distance) {
 			if (Instruction_time >= variable.HIT_Time)
 			{
-				if (item.Stone <= 0 || enemyquarryai.hp <= 0 || enemyquarryai == null) {
+				//돌이 아닌 무기 확인해야 함
+				if (CaveStorage.Instance.storedStoneObjs.Count <= 0 || enemyquarryai.hp <= 0 || enemyquarryai == null) { 
 					StandardMode();
 				} 
 
 				else {
-					item.Stone--;
+					//공격무기 내구 감소
                     //enemyquarryai.hp--;
                     enemyquarryai.AttackedByWorker(this.transform.position);
 					Instruction_time = 0;

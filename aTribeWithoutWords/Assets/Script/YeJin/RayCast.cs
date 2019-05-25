@@ -12,7 +12,6 @@ public class RayCast : MonoBehaviour
     public string hitname = null; //검출된 타켓의 이름
 
 	Variable variable; // 변수 제어 스크립트
-	Item item; // 아이템 창
     NPCMove npcmove; //npc 스크립트
 
     public GameObject prefab; //느낌표 프리팹
@@ -22,7 +21,6 @@ public class RayCast : MonoBehaviour
     void Start()
     {
         variable = Itemlist.GetComponent<Variable>();
-		item = Itemlist.GetComponent<Item> ();
     }
 
     // Update is called once per frame
@@ -103,7 +101,7 @@ public class RayCast : MonoBehaviour
 				else if (hit.transform.gameObject.tag == "Small_Animal") 
 				{
 					//수행인원과 돌개수를 확인하여 적절하지 않다면 초기로 돌린다.
-					if (variable.selectnpc_count >= variable.Hit_Small_Animal_NPCCount || item.Stone < variable.Hit_Small_Animal_Stone) {
+					if (variable.selectnpc_count >= variable.Hit_Small_Animal_NPCCount || CaveStorage.Instance.storedStoneObjs.Count < variable.Hit_Small_Animal_Stone) {
 						Debug.Log ("수행인원이 너무 많거나 돌이 부족합니다.");
 
 						int imsi_count = variable.selectnpc_count;
