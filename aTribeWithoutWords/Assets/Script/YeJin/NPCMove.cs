@@ -65,6 +65,9 @@ public class NPCMove : MonoBehaviour
     protected Vector3 lastAgentVelocity;
     protected NavMeshPath lastAgentPath;
 
+	//animation
+	Animator ani;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +103,10 @@ public class NPCMove : MonoBehaviour
 
 		//상태 코루틴 시작
         StartCoroutine("FSM");
+
+		//애니메이션
+		//ani = this.GetComponent<Animator> ();
+		//ani.Play (0);
     }
 
     IEnumerator FSM()
