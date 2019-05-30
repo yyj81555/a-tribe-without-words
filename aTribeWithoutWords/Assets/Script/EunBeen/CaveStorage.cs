@@ -41,10 +41,7 @@ public class CaveStorage : MonoBehaviour {
     // 게임 아이템에 대한 스크립트를 작성할 필요가 있을까? 돌, 과일, 갈대 등
 
     void Start () {
-        /*
-        StoreItem(MapItemGenerator.Instance.CreateFruit(Vector3.zero), ItemType.FRUIT);
-        StoreItem(MapItemGenerator.Instance.CreateStone(Vector3.zero), ItemType.STONE);
-        */
+
 	}
 
     /*
