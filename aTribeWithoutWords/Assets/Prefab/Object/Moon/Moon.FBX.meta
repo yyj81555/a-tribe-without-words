@@ -1,22 +1,14 @@
 fileFormatVersion: 2
-guid: 6614ff659bd0f8649855233ced6ee1f2
+guid: 6121b00aac898784e9ccc60704fa036e
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Line001
-    100002: Object001
-    100004: //RootNode
-    400000: Line001
-    400002: Object001
-    400004: //RootNode
-    2100000: 02 - Default
-    2100002: 03 - Default
-    2300000: Line001
-    2300002: Object001
-    3300000: Line001
-    3300002: Object001
+    100000: //RootNode
+    400000: //RootNode
+    2100000: 01 - Default
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Line001
-    4300002: Object001
     9500000: //RootNode
   externalObjects: {}
   materials:

@@ -6,6 +6,7 @@ public class DayNightCycle : MonoBehaviour {
 
     [SerializeField] Transform centerOfGameMap;
     public Transform sun, moon;
+    public GameObject sunObj, moonObj;
 
     [SerializeField] int distanceFromOrigin = 50;
     [SerializeField] float daySpeed = .1f;
@@ -41,6 +42,8 @@ public class DayNightCycle : MonoBehaviour {
 	
 	void FixedUpdate () {
         transform.Rotate(0, 0, daySpeed);
+        sunObj.transform.position = sun.position;
+        moonObj.transform.position = moon.position;
 
        if((transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180) && !isSunRise)
         {
