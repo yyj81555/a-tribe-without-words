@@ -26,8 +26,10 @@ public class GameLevelManager : MonoBehaviour {
         }
     }
 
-    // 현재 몇일이 흘렀는지(DayNightCycle에서 계산)
+    // 현재 몇일이 흘렀는지 (DayNightCycle에서 계산)
     public int inGameDays = 0;
+    // 낮인지 밤인지 (DayNightCycle에서 계산)
+    public bool isSunRise = false;
 
     void Start () {
 		

@@ -5,8 +5,8 @@ using UnityEngine;
 public class DayNightCycle : MonoBehaviour {
 
     [SerializeField] Transform centerOfGameMap;
-    public Transform sun, moon;
-    public GameObject sunObj, moonObj;
+    [SerializeField] Transform sun, moon;
+    [SerializeField] GameObject sunObj, moonObj;
 
     [SerializeField] int distanceFromOrigin = 50;
     [SerializeField] float daySpeed = .1f;
@@ -14,9 +14,6 @@ public class DayNightCycle : MonoBehaviour {
     [SerializeField] int orbitAngle = 35;
     [SerializeField] int sunrisePosition;
     [SerializeField] int dayProgress = 10;
-
-    // 현재 낮인지 밤인지 판단
-    public bool isSunRise = false;
 
     void Start () {
         SetupOrbital();
@@ -45,14 +42,14 @@ public class DayNightCycle : MonoBehaviour {
         sunObj.transform.position = sun.position;
         moonObj.transform.position = moon.position;
 
-       if((transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180) && !isSunRise)
-        {
-            isSunRise = true;
+       if((transform.eulerAngles.z > 0 && transform.eulerAngles.z < 180) && !GameLevelManager.Instance.isSunRise)
+       {
+            GameLevelManager.Instance.isSunRise = true;
             GameLevelManager.Instance.inGameDays++;
-        }
-       else if ((transform.eulerAngles.z > 180 && transform.eulerAngles.z < 360) && isSunRise)
-        {
-            isSunRise = false;
-        }
+       }
+       else if ((transform.eulerAngles.z > 180 && transform.eulerAngles.z < 360) && GameLevelManager.Instance.isSunRise)
+       {
+            GameLevelManager.Instance.isSunRise = false;
+       }
     }
 }
