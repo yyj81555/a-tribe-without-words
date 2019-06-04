@@ -25,4 +25,26 @@ public class ButtonManager : MonoBehaviour {
 			npcmove.commandstate = NPCMove.CommandState.FRUIT_PICKING;
 		}
 	}
+
+	public void OnClickStonePickUp()
+	{
+
+		for(int i = 0; i < variable.selectnpc_count; i++)
+		{
+			Debug.Log (variable.selectnpc [i].name);
+			npcmove = variable.selectnpc[i].GetComponent<NPCMove>();
+			npcmove.commandstate = NPCMove.CommandState.STONE_PICKING;
+		}
+	}
+
+	public void OnClickHitAnimall()
+	{
+
+		for(int i = 0; i < variable.selectnpc_count; i++)
+		{
+			Debug.Log (variable.selectnpc [i].name);
+			npcmove = variable.selectnpc[i].GetComponent<NPCMove>();
+			npcmove.commandstate = NPCMove.CommandState.HIT_SMALL_ANIMALL;
+		}
+	}
 }
