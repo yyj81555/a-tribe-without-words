@@ -8,20 +8,20 @@ public class HandUIManager : MonoBehaviour {
     public GameObject MenuPanel;
 
     [Header("Buttons Setting")]
-    public GameObject AchievementText;
-    public GameObject InventoryText;
-    public GameObject OptionText;
+    public GameObject AchievementTitle;
+    public GameObject InventoryTitle;
+    public GameObject OptionTitle;
 
     private void Start()
     {
         MenuPanel.SetActive(false);
 
-        AchievementText.SetActive(false);
-        InventoryText.SetActive(false);
-        OptionText.SetActive(false);
+        AchievementTitle.SetActive(false);
+        InventoryTitle.SetActive(false);
+        OptionTitle.SetActive(false);
     }
 
-    #region Menu Open Toggle의 콜백함수
+    // Menu Open Toggle의 콜백함수
     public void OnPressedToggle()
     {
         MenuPanel.SetActive(true);
@@ -33,11 +33,9 @@ public class HandUIManager : MonoBehaviour {
         MenuPanel.SetActive(false);
         Debug.Log("UnPressed!");
     }
-    #endregion
 
 
-    #region Menu Pannel이 갖고있는 버튼들에 대한 콜백함수
-
+    // Menu Pannel이 갖고있는 버튼들에 대한 콜백함수
     public void OnAchievementButton()
     {
         SetAchievement(true);
@@ -59,40 +57,42 @@ public class HandUIManager : MonoBehaviour {
         SetOption(true);
     }
 
+    // 업적 메뉴 세팅
     private void SetAchievement(bool isPressed)
     {
         if (isPressed == true)
         {
-            AchievementText.SetActive(true);
+            AchievementTitle.SetActive(true);
         }
         else
         {
-            AchievementText.SetActive(false);
+            AchievementTitle.SetActive(false);
         }
     }
 
+    // 인벤토리 메뉴 세팅
     private void SetInventory(bool isPressed)
     {
         if (isPressed == true)
         {
-            InventoryText.SetActive(true);
+            InventoryTitle.SetActive(true);
         }
         else
         {
-            InventoryText.SetActive(false);
+            InventoryTitle.SetActive(false);
         }
     }
 
+    // 옵션 메뉴 세팅
     private void SetOption(bool isPressed)
     {
         if (isPressed == true)
         {
-            OptionText.SetActive(true);
+            OptionTitle.SetActive(true);
         }
         else
         {
-            OptionText.SetActive(false);
+            OptionTitle.SetActive(false);
         }
     }
-    #endregion
 }

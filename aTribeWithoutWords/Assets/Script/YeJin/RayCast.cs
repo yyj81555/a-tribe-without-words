@@ -100,7 +100,7 @@ public class RayCast : MonoBehaviour
 				else if (hit.transform.gameObject.tag == "Small_Animal") 
 				{
 					//수행인원과 돌개수를 확인하여 적절하지 않다면 초기로 돌린다.
-					if (variable.selectnpc_count >= variable.Hit_Small_Animal_NPCCount || CaveStorage.Instance.storedStoneObjs.Count < variable.Hit_Small_Animal_Stone) {
+					if (variable.selectnpc_count >= variable.Hit_Small_Animal_NPCCount || CaveStorage.Instance.storedStoneNum < variable.Hit_Small_Animal_Stone) {
 						Debug.Log ("수행인원이 너무 많거나 돌이 부족합니다.");
 
 						int imsi_count = variable.selectnpc_count;
