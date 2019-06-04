@@ -202,7 +202,7 @@ public class NPCMove : MonoBehaviour
 		ReemoveList();
 
 		//명령이 사냥이면 바로 상태 넘김
-		if (commandstate == CommandState.HIT_SMALL_ANIMALL) {
+			if (commandstate == CommandState.HIT_SMALL_ANIMALL) {
 			npcstate = NPCState.COMMAND_EXCUTION;
 		} 
 
