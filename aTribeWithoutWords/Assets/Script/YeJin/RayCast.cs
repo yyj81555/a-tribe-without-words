@@ -87,8 +87,7 @@ public class RayCast : MonoBehaviour
 						for (int i = 0; i < variable.selectnpc_count; i++) {
 							npcmove = variable.selectnpc [i].GetComponent<NPCMove> ();
 
-							if (npcmove.npcstate == NPCMove.NPCState.FOLLOW_PLAYER) {
-								npcmove.commandstate = NPCMove.CommandState.STONE_PICKING;
+							if (npcmove.npcstate == NPCMove.NPCState.FOLLOW_PLAYER && npcmove.commandstate == NPCMove.CommandState.STONE_PICKING) {
 								npcmove.npcstate = NPCMove.NPCState.COMMAND_STATE;
 
 								npcmove.target = hit.transform.gameObject;
@@ -117,8 +116,7 @@ public class RayCast : MonoBehaviour
 						for (int i = 0; i < variable.selectnpc_count; i++) {
 							npcmove = variable.selectnpc [i].GetComponent<NPCMove> ();
 
-							if (npcmove.npcstate == NPCMove.NPCState.FOLLOW_PLAYER) {
-								npcmove.commandstate = NPCMove.CommandState.HIT_SMALL_ANIMALL;
+							if (npcmove.npcstate == NPCMove.NPCState.FOLLOW_PLAYER && npcmove.commandstate == NPCMove.CommandState.HIT_SMALL_ANIMALL) {
 								npcmove.npcstate = NPCMove.NPCState.COMMAND_STATE;
 
 								npcmove.target = hit.transform.gameObject;

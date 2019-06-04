@@ -68,7 +68,11 @@ public class NPCMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //raycast = Main_Camera.GetComponent<RayCast>();
+		Player = GameObject.Find("VRPLAYER");
+		Cave = GameObject.Find ("동굴");
+		Itemlist = GameObject.Find ("variable");
+		Main_Camera = GameObject.Find ("Main Camera");
+
         variable = Itemlist.GetComponent<Variable>();
 		npcitem = this.GetComponent<NPCItem> ();
         agent = GetComponent<NavMeshAgent>();
