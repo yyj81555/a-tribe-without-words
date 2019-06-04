@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 // 공통적인 적 AI 설계. 
 // 상속시킬 변수, 메서드 정의.
