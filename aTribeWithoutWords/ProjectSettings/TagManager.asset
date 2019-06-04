@@ -9,6 +9,7 @@ TagManager:
   - Mine
   - Cave
   - Small_Animal
+  - Start
   layers:
   - Default
   - TransparentFX
