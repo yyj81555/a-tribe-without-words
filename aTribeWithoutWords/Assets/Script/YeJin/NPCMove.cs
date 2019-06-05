@@ -264,7 +264,7 @@ public class NPCMove : MonoBehaviour
     public void Fruit_Gathering()
     {
 		//과일개수가 최대저장 개수보다 많은경우 자유이동으로 변경
-		if (CaveStorage.Instance.storedFruitNum >= variable.MAX_Fruit)
+		if (CaveStorage.Instance.storedFruitObjs.Count >= variable.MAX_Fruit)
         {
             StandardMode();
         }
@@ -297,7 +297,7 @@ public class NPCMove : MonoBehaviour
     public void Stone_Gathering()
     {
 		//돌개수가 최대 돌 소유 개수보다 많은경우 자유이동으로 변경
-		if (CaveStorage.Instance.storedStoneNum >= variable.MAX_Stone)
+		if (CaveStorage.Instance.storedStoneObjs.Count >= variable.MAX_Stone)
 		{
 			StandardMode();
 		}
@@ -329,7 +329,7 @@ public class NPCMove : MonoBehaviour
 			if (Instruction_time >= variable.HIT_Time)
 			{
 				//돌이 아닌 무기 확인해야 함
-				if (CaveStorage.Instance.storedStoneNum <= 0 || enemyquarryai.hp <= 0 || enemyquarryai == null) { 
+				if (CaveStorage.Instance.storedStoneObjs.Count <= 0 || enemyquarryai.hp <= 0 || enemyquarryai == null) { 
 					StandardMode();
 				} 
 
