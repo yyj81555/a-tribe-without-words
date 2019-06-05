@@ -54,6 +54,7 @@ public class NPCMove : MonoBehaviour
 	Variable variable; // 변수 제어 스크립트
 	NPCItem npcitem;
 	FruitTree fruittree;
+	Mine mine;
     private bool alive; // 코루틴 변수
 
 	public GameObject target; //선택된 타겟
@@ -307,9 +308,16 @@ public class NPCMove : MonoBehaviour
 		{
 			if (Instruction_time >= variable.Stone_Picking_Time)
 			{
-				//아이템저장
+				mine = target.GetComponent<Mine> ();
+				npcitem.have_Item = mine.GetStone ();
+				npcitem.have_Item.transform.position = Vector3.zero;
+				npcitem.have_Item.transform.parent = this.transform;
+				npcitem.have_Item.transform.localPosition = new Vector3(0, -0.04f, 0.04f);
+				npcitem.have_Item.transform.localScale = new Vector3 (1, 1, 1) * 0.2f;
+
 				Instruction_time = 0;
-				StandardMode();
+				agent.destination = Cave.transform.position;
+				npcstate = NPCState.CAVE_MOVEMENT_STATUS;
 			}
 			else
 			{
