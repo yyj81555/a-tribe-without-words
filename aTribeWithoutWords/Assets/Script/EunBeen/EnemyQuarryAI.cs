@@ -19,12 +19,25 @@ public class EnemyQuarryAI : EnemyAIBase
     // 도망에 대한 변수
     Vector3 runPos = Vector3.zero;
     float runawayTime = 0.0f;
-    public float runSpeed = 2f;
+    public float runSpeed = 1f;
 
     public override void Start()
     {
         base.Start();
+        Init();
+    }
+
+    void Init()
+    {
+        hp = 3;
+
         patrolPos = this.transform.position + new Vector3(Random.Range(-5f, 5f), 0.0f, Random.Range(-5f, 5f));
+        patrolCycleTime = 0.0f;
+        patrolSpeed = 0.5f;
+
+        runPos = Vector3.zero;
+        runawayTime = 0.0f;
+        runSpeed = 1f;
     }
 
     protected override void Patrol()
