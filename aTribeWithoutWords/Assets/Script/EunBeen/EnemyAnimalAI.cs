@@ -31,6 +31,8 @@ public class EnemyAnimalAI : EnemyAIBase
         base.Start();
 
         targets = new List<GameObject>();
+
+        GameLevelManager.Instance.enemyInMapList.Add(this.gameObject);
     }
 
     protected override void Patrol()
@@ -99,6 +101,11 @@ public class EnemyAnimalAI : EnemyAIBase
     {
         base.Die();
         Destroy(this.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        GameLevelManager.Instance.enemyInMapList.Remove(this.gameObject);
     }
 
     public void AttackedByWorker()

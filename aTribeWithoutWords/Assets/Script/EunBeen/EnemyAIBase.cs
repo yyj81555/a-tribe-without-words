@@ -20,9 +20,6 @@ public class EnemyAIBase : MonoBehaviour
     }
 
     public NavMeshAgent agent;
-    // public ThirdPersonCharacter charContrler;
-    // ThirdPersonCharacter를 활용하면 agent의 이동에 따라 변하는 회전, 속도 등을 고려한 자연스러운 애니메이션을 구현가능.
-    // 이것을 직접 구현하려면 꽤 어려움. ThirdPersonCharacter를 분석해서 수정하는것이 빠를거같음.
 
     private Animator animator;
 
@@ -31,7 +28,6 @@ public class EnemyAIBase : MonoBehaviour
     private State lastState;
     private bool stateChanged;
     protected bool alive;
-
 
     // 회전을 위한 변수
     private float rotationSpeed = 2f;

@@ -54,6 +54,9 @@ public class EnemyTribeAI : EnemyAIBase
                 attackCycleTime = 4f;
                 break;
         }
+
+        // 맵상에 존재하는 적 리스트에 추가
+        GameLevelManager.Instance.enemyInMapList.Add(this.gameObject);
     }
     #region AI 행동들
     protected override void Patrol()
@@ -137,6 +140,13 @@ public class EnemyTribeAI : EnemyAIBase
         Destroy(this.gameObject);
     }
     #endregion
+
+    // Destroy 콜백함수
+    private void OnDestroy()
+    {
+        // 맵상에 존재하지 않는 적들은 리스트에서 제거
+        GameLevelManager.Instance.enemyInMapList.Remove(this.gameObject);
+    }
 
     public void AttackedByWorker()
     {
