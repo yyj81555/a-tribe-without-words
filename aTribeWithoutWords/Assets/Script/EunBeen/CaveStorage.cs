@@ -51,25 +51,22 @@ public class CaveStorage : MonoBehaviour {
 
         // 손으로 집을 수 있도록 처리한다.
         item.AddComponent<Rigidbody>();
-        item.AddComponent<InteractionBehaviour>();
+        item.AddComponent<InteractionBehaviour>(); // 손으로 집을수 있도록 InteractionBehaviour 설정
 
         if (type == ItemType.FRUIT)
         {
             item.transform.position = Vector3.zero;
             item.transform.localScale = new Vector3(1, 1, 1);  /* 손으로 집기 용이한 크기로 해야함 */
-            item.transform.parent = this.transform.GetChild(3); /* 동굴 오브젝트의 자식에 있는 StoredItems 오브젝트에 넣는다. 인덱스를 사용하기 때문에 주의해야함. */
+            item.transform.parent = this.transform.GetChild(2); /* 동굴 오브젝트의 자식에 있는 StoredItems 오브젝트에 넣는다. 인덱스를 사용하기 때문에 주의해야함. */
             item.transform.localPosition = new Vector3(0.55f, -0.3f, 0.83f); // 동굴안에 저장될 위치 지정
 
             storedFruitObjs.Add(item);
-
-            // 저장된 아이템 개수 증가
-            //storedFruitNum++;
         }
         else if (type == ItemType.STONE)
         {
             item.transform.position = Vector3.zero;
             item.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
-            item.transform.parent = this.transform.GetChild(3);
+            item.transform.parent = this.transform.GetChild(2);
             item.transform.localPosition = new Vector3(-0.37f, -0.3f, 0.83f);
 
             storedStoneObjs.Add(item);
@@ -92,7 +89,7 @@ public class CaveStorage : MonoBehaviour {
                 Destroy(rmvItem);
             }
             else
-                Debug.Log("소모하려는 아이템이 저장된 리스트에 없는 아이템입니다.");
+                Debug.Log("소모하려는 아이템이 storedFruitObjs 리스트에 없는 아이템입니다.");
         }
         else if (type == ItemType.STONE)
         {
@@ -102,7 +99,7 @@ public class CaveStorage : MonoBehaviour {
                 Destroy(rmvItem);
             }
             else
-                Debug.Log("소모하려는 아이템이 저장된 리스트에 없는 아이템입니다.");
+                Debug.Log("소모하려는 아이템이 storedStoneObjs 리스트에 없는 아이템입니다.");
         }
     }
 
