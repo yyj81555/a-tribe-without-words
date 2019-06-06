@@ -12,19 +12,21 @@ public class EnemyQuarryAI : EnemyAIBase
     public int hp = 3;
 
     // 정찰에 대한 변수
-    Vector3 patrolPos = Vector3.zero;
-    float patrolCycleTime = 0.0f;
-    public float patrolSpeed = 0.5f;
+    Vector3 patrolPos;
+    float patrolCycleTime;
+    public float patrolSpeed;
 
     // 도망에 대한 변수
-    Vector3 runPos = Vector3.zero;
-    float runawayTime = 0.0f;
-    public float runSpeed = 1f;
+    Vector3 runPos;
+    float runawayTime;
+    public float runSpeed;
 
     public override void Start()
     {
-        base.Start();
         Init();
+        base.Start();
+        // 맵에 존재하는 사냥감 리스트 추가
+        GameLevelManager.Instance.quryListInMap.Add(this.gameObject);
     }
 
     void Init()
@@ -38,6 +40,10 @@ public class EnemyQuarryAI : EnemyAIBase
         runPos = Vector3.zero;
         runawayTime = 0.0f;
         runSpeed = 1f;
+
+        // 스폰 위치 설정
+        Transform quarrySpawnPoint = GameObject.Find("WayPoints").transform.Find("QuarrySpawnPoint");
+        this.transform.position = quarrySpawnPoint.GetChild(Random.Range(0, quarrySpawnPoint.childCount)).transform.position;
     }
 
     protected override void Patrol()
@@ -77,15 +83,14 @@ public class EnemyQuarryAI : EnemyAIBase
     protected override void Die()
     {
         base.Die();
+
+        GameLevelManager.Instance.quryListInMap.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
 
     // 공격당하면 호출(Worker가 공격했을때 호출됨)
     public void AttackedByWorker(Vector3 attackerPos)
     {
-        if (hp <= 0) { hp = 0; }
-        else { hp -= 1; }
-
         runawayTime = 0.0f;
 
         // 공격한 개체의 위치로부터 반대 위치 계산
@@ -95,10 +100,12 @@ public class EnemyQuarryAI : EnemyAIBase
 
         if (hp <= 0)
         {
+            hp = 0;
             state = State.DIE;
         }
         else
         {
+            hp -= 1;
             state = State.RUNAWAY;
         }
     }

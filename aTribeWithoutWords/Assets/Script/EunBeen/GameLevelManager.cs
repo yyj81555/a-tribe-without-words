@@ -48,9 +48,10 @@ public class GameLevelManager : MonoBehaviour {
     //[SerializeField] GameObject soldierTribeObj;
     //[SerializeField] GameObject shamanTribeObj;
 
-    // 맵상에 존재하는 적 리스트. 맵에서 적이 나타나고 사라질때마다 최신화됨. (EnemyAnimalAI, EnemyTribeAI 클래스만 해당)
-    public List<GameObject> enemyAnimalInMapList;
-    public List<GameObject> enemyTribeInMapList;
+    // 맵상에 존재하는 적 리스트. 맵에 적이 생성되고 제거될때마다 최신화된다.
+    public List<GameObject> emyAniListInMap; // 멧돼지
+    public List<GameObject> emyTriListInMap; // 적 부족
+    public List<GameObject> quryListInMap;   // 사냥감
 
     void Start () {
         Init();
@@ -68,14 +69,14 @@ public class GameLevelManager : MonoBehaviour {
 
         // 밤에 적이 존재하지 않다면 적 출현
         if (!isSunRise && !IsEnemyAnimalAlive())
-        {
-            EnemyAnimalAppear();
-        }
+            CreateEnemyAnimal();
 
         if (!isSunRise && !IsEnemyTribeAlive())
-        {
-            EnemyTribeAppear();
-        }
+            CreateEnemyTribe();
+
+        // 밤에 사냥감이 존재하지 않는다면 사냥감 생성
+        if (!isSunRise && !IsQuarryAlive())
+            CreateQuarry();
 
         // 레벨 클리어시 다음 단계로 이동
         if (isLevelClearFlag == true)
@@ -106,13 +107,13 @@ public class GameLevelManager : MonoBehaviour {
     }
 
     // 적 동물 생성
-    void EnemyAnimalAppear()
+    void CreateEnemyAnimal()
     {
         switch (levelState)
         {
             case GameLevel.OldStoneAge: // 구석기 시대 : 멧돼지
                 Instantiate(boarObj);
-                Debug.Log("생성");
+                Debug.Log("멧돼지 생성");
                 break;
             case GameLevel.NewStoneAge: /* 신석기 시대 : 멧돼지 또는 호랑이? 혹시모르니 나누었음. */
                 //Instantiate(boarObj);
@@ -123,8 +124,8 @@ public class GameLevelManager : MonoBehaviour {
         }
     }
 
-    // 적 부족 생성
-    void EnemyTribeAppear()
+    // 적 부족 생성 /* 적 부족은 부족 타입에 따라 달라지는 값처리가 필요함. 현재 생성 직후 초기화되기 때문에 별도의 설정방법 필요 */
+    void CreateEnemyTribe()
     {
         switch (levelState)
         {
@@ -140,10 +141,30 @@ public class GameLevelManager : MonoBehaviour {
         }
     }
 
-    // 맵상에 적이 존재하는지 체크 /* 낮이 되어 적들이 모두 도망가거나 부족을 이용해 쫓아내면 enemyAnimalInMapList에서 제거됨. --> Destroy()를 통해 적을 사라지게 할때 enemyInMapList에서 제거 */
+    void CreateQuarry()
+    {
+        switch (levelState)
+        {
+            case GameLevel.OldStoneAge:
+                Instantiate(rabbitObj);
+                Instantiate(rabbitObj);
+                Debug.Log("토끼 생성");
+                break;
+            case GameLevel.NewStoneAge:
+                Instantiate(rabbitObj);
+                Instantiate(rabbitObj);
+                break;
+            case GameLevel.BronzeAge:
+                Instantiate(rabbitObj);
+                Instantiate(rabbitObj);
+                break;
+        }
+    }
+
+    // 맵상에 적이 존재하는지 체크
     bool IsEnemyAnimalAlive()
     {
-        if (enemyAnimalInMapList.Count > 0)
+        if (emyAniListInMap.Count > 0)
             return true;
         else
             return false;
@@ -151,7 +172,15 @@ public class GameLevelManager : MonoBehaviour {
 
     bool IsEnemyTribeAlive()
     {
-        if (enemyTribeInMapList.Count > 0)
+        if (emyTriListInMap.Count > 0)
+            return true;
+        else
+            return false;
+    }
+
+    bool IsQuarryAlive()
+    {
+        if (quryListInMap.Count > 0)
             return true;
         else
             return false;

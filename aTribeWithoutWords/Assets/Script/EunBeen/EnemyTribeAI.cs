@@ -21,7 +21,7 @@ public class EnemyTribeAI : EnemyAIBase
 
 
     // 정찰에 대한 변수
-    public GameObject[] waypoints;  // 정찰하는 지점
+    public Transform[] waypoints;  // 정찰하는 지점
     private int waypointIndex = 0;
     public float patrolSpeed = 2f;
     const float waypntLeftDist = 4f; // waypoint까지 남은 거리
@@ -40,19 +40,19 @@ public class EnemyTribeAI : EnemyAIBase
     {
         Init();
         base.Start();
-        // 맵상에 존재하는 적 리스트에 추가
-        GameLevelManager.Instance.enemyTribeInMapList.Add(this.gameObject);
+        // 맵에 존재하는 적 리스트 추가
+        GameLevelManager.Instance.emyTriListInMap.Add(this.gameObject);
     }
 
     void Init()
     {
-        waypoints = new GameObject[3];
+        waypoints = new Transform[3];
         targets = new List<GameObject>();
 
-        Transform enemyWayPoints = GameObject.Find("WayPoints").transform.GetChild(1);
-        waypoints[0] = enemyWayPoints.GetChild(0).gameObject; // spawn1
-        waypoints[1] = enemyWayPoints.GetChild(1).gameObject; // spawn2
-        waypoints[2] = enemyWayPoints.GetChild(2).gameObject; // cavePoint
+        Transform enemyWayPoints = GameObject.Find("WayPoints").transform.Find("EnemyWayPoint");
+        waypoints[0] = enemyWayPoints.GetChild(0); // spawn1
+        waypoints[1] = enemyWayPoints.GetChild(1); // spawn2
+        waypoints[2] = enemyWayPoints.GetChild(2); // cavePoint
 
         // 적 부족타입에 따라 다르게 처리
         switch (tribeType)
@@ -74,7 +74,7 @@ public class EnemyTribeAI : EnemyAIBase
         }
 
         // 스폰 위치 설정
-        this.transform.position = waypoints[Random.Range(0, 2)].transform.position;
+        this.transform.position = waypoints[Random.Range(0, 2)].position;
     }
 
     #region AI 행동들
@@ -82,13 +82,13 @@ public class EnemyTribeAI : EnemyAIBase
     {
         agent.speed = patrolSpeed;
 
-        if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].transform.position) >= waypntLeftDist)
+        if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].position) >= waypntLeftDist)
         {
-            agent.SetDestination(waypoints[waypointIndex].transform.position);
-            LookToward(waypoints[waypointIndex].transform.position);
+            agent.SetDestination(waypoints[waypointIndex].position);
+            LookToward(waypoints[waypointIndex].position);
         }
         // waypoint에 도달한 경우
-        else if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].transform.position) < waypntLeftDist)
+        else if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].position) < waypntLeftDist)
         {
             waypointIndex += 1; // 다음 지점으로 이동
             if (waypointIndex >= waypoints.Length)
@@ -155,7 +155,7 @@ public class EnemyTribeAI : EnemyAIBase
     {
         base.Die();
 
-        GameLevelManager.Instance.enemyTribeInMapList.Remove(this.gameObject);
+        GameLevelManager.Instance.emyTriListInMap.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
     #endregion
