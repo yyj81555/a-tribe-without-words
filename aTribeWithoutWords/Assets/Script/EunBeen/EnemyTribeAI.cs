@@ -16,7 +16,7 @@ public class EnemyTribeAI : EnemyAIBase
     }
 
     [Header("State Setting")]
-    public int hp = 20;
+    public int hp;
     public EnmyTribeType tribeType = EnmyTribeType.SOLDIER;  // 적 부족 종류
 
 
@@ -27,34 +27,56 @@ public class EnemyTribeAI : EnemyAIBase
     const float waypntLeftDist = 4f; // waypoint까지 남은 거리
 
     // 추격에 대한 변수
-    public float chaseSpeed = 4f;
+    public float chaseSpeed;
     private List<GameObject> targets;
 
     // 공격에 대한 변수
-    public float attackPower = 3;
-    private float attackTime = 0f;
+    public float attackPower;
+    private float attackTime;
     private float attackCycleTime;  // 공격 사이클
-    const float attackRange = 8f;   // 공격 사정거리
+    private float attackRange;   // 공격 사정거리
 
     public override void Start()
     {
+        Init();
         base.Start();
+        // 맵상에 존재하는 적 리스트에 추가
+        GameLevelManager.Instance.enemyTribeInMapList.Add(this.gameObject);
+    }
 
+    void Init()
+    {
+        waypoints = new GameObject[3];
         targets = new List<GameObject>();
+
+        Transform enemyWayPoints = GameObject.Find("WayPoints").transform.GetChild(1);
+        waypoints[0] = enemyWayPoints.GetChild(0).gameObject; // spawn1
+        waypoints[1] = enemyWayPoints.GetChild(1).gameObject; // spawn2
+        waypoints[2] = enemyWayPoints.GetChild(2).gameObject; // cavePoint
 
         // 적 부족타입에 따라 다르게 처리
         switch (tribeType)
         {
             case EnmyTribeType.SOLDIER:
                 hp = 10;
+                chaseSpeed = 4f;
+                attackPower = 3;
                 attackCycleTime = 2f;
+                attackRange = 5f;
                 break;
             case EnmyTribeType.SHAMAN:
                 hp = 20;
+                chaseSpeed = 3f;
+                attackPower = 5;
                 attackCycleTime = 4f;
+                attackRange = 10f;
                 break;
         }
+
+        // 스폰 위치 설정
+        this.transform.position = waypoints[Random.Range(0, 2)].transform.position;
     }
+
     #region AI 행동들
     protected override void Patrol()
     {
@@ -64,7 +86,6 @@ public class EnemyTribeAI : EnemyAIBase
         {
             agent.SetDestination(waypoints[waypointIndex].transform.position);
             LookToward(waypoints[waypointIndex].transform.position);
-            //Debug.Log("정찰중");
         }
         // waypoint에 도달한 경우
         else if (Vector3.Distance(this.transform.position, waypoints[waypointIndex].transform.position) < waypntLeftDist)
@@ -74,7 +95,6 @@ public class EnemyTribeAI : EnemyAIBase
             {
                 waypointIndex = 0;
             }
-            //Debug.Log("다음 정찰지점으로 이동");
         }
         else
         {
@@ -134,6 +154,8 @@ public class EnemyTribeAI : EnemyAIBase
     protected override void Die()
     {
         base.Die();
+
+        GameLevelManager.Instance.enemyTribeInMapList.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
     #endregion

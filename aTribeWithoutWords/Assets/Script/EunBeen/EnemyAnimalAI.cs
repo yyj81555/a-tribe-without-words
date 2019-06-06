@@ -9,30 +9,52 @@ public class EnemyAnimalAI : EnemyAIBase
     // ...
 
     [Header("State Setting")]
-    public int hp = 10;
+    public int hp;
 
     // 정찰에 대한 변수
     public GameObject[] waypoints;  // 정찰하는 지점
     private int waypointIndex = 0;
-    public float patrolSpeed = 3f;
-    float waypntLeftDist = 4f; // waypoint까지 남은 거리
+    public float patrolSpeed;
+    const float waypntLeftDist = 4f; // waypoint까지 남은 거리
 
     // 추격에 대한 변수
-    public float chaseSpeed = 5f;
+    public float chaseSpeed;
     private List<GameObject> targets;
 
     // 공격에 대한 변수
-    public float attackPower = 1;
+    public float attackPower;
     float attackTime = 0f;
-    float attackRange = 1.5f;
+    float attackRange;
 
     public override void Start()
     {
+        Init();
         base.Start();
-
-        targets = new List<GameObject>();
+        // 맵상에 존재하는 적 리스트에 추가
+        GameLevelManager.Instance.enemyAnimalInMapList.Add(this.gameObject);
     }
 
+    void Init()
+    {
+        waypoints = new GameObject[3];
+        targets = new List<GameObject>();
+
+        Transform enemyWayPoints = GameObject.Find("WayPoints").transform.GetChild(1);
+        waypoints[0] = enemyWayPoints.GetChild(0).gameObject; // spawn1
+        waypoints[1] = enemyWayPoints.GetChild(1).gameObject; // spawn2
+        waypoints[2] = enemyWayPoints.GetChild(2).gameObject; // cavePoint
+
+        hp = 5;
+        patrolSpeed = 3f;
+        chaseSpeed = 5f;
+        attackPower = 1;
+        attackRange = 1.5f;
+        
+        // 스폰 위치 설정
+        this.transform.position = waypoints[Random.Range(0, 2)].transform.position;
+    }
+
+    #region AI 행동들
     protected override void Patrol()
     {
         agent.speed = patrolSpeed;
@@ -98,8 +120,11 @@ public class EnemyAnimalAI : EnemyAIBase
     protected override void Die()
     {
         base.Die();
+
+        GameLevelManager.Instance.enemyAnimalInMapList.Remove(this.gameObject);
         Destroy(this.gameObject);
     }
+    #endregion
 
     public void AttackedByWorker()
     {

@@ -306,6 +306,7 @@ Transform:
   m_Children:
   - {fileID: 2007356121}
   - {fileID: 2054238685}
+  - {fileID: 1521644122}
   m_Father: {fileID: 993677086}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -715,6 +716,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inGameDays: 0
   isSunRise: 0
+  levelState: 0
+  isLevelClearFlag: 0
+  rabbitObj: {fileID: 1022728184001408, guid: 24da7650ea63b1c4b8bced84322c2f3c, type: 2}
+  boarObj: {fileID: 1218126395369892, guid: 6085fada769ee9141a6a240559629655, type: 2}
+  soldierTribeObj: {fileID: 0}
+  shamanTribeObj: {fileID: 0}
+  enemyAnimalInMapList: []
+  enemyTribeInMapList: []
 --- !u!1 &577696369
 GameObject:
   m_ObjectHideFlags: 0
@@ -2182,6 +2191,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2cfd9ab04c7896f42bd7cdbb945c79e5, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1521644121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1521644122}
+  m_Layer: 0
+  m_Name: cavePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1521644122
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1521644121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.83, y: 14.12, z: -13.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 299849284}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1564631091 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: b4d4e2e49d32c074eb32d552c6fb7752, type: 3}
@@ -2364,7 +2401,7 @@ Prefab:
       objectReference: {fileID: 2054238684}
     - target: {fileID: 1218126395369892, guid: 6085fada769ee9141a6a240559629655, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6085fada769ee9141a6a240559629655, type: 2}
@@ -2736,7 +2773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2007356121}
   m_Layer: 0
-  m_Name: 1
+  m_Name: spawn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2749,7 +2786,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2007356120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.01, y: 12.26, z: 8.14}
+  m_LocalPosition: {x: -18.71, y: 14.4, z: 26.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 299849284}
@@ -2830,7 +2867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2054238685}
   m_Layer: 0
-  m_Name: 2
+  m_Name: spawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2843,7 +2880,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2054238684}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.31, y: 12.26, z: 2.85}
+  m_LocalPosition: {x: 19.74, y: 12.26, z: 10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 299849284}
