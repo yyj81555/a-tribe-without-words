@@ -154,14 +154,19 @@ public class PointHand : MonoBehaviour
 			for (int i = 0; i < variable.selectnpc_count; i++)
 			{
 				Debug.Log(variable.selectnpc[i].name);
+				variable.selectnpc [i].GetComponent<Animator> ().SetInteger ("ani_state", 2);
+
 				npcmove = variable.selectnpc[i].GetComponent<NPCMove>();
 				npcmove.commandstate = NPCMove.CommandState.STONE_PICKING;
 			}
 		}
+
 		//열매따기
 		if (CheckFruitMotion() == true)
 		{
 			Debug.Log("열매");
+			variable.selectnpc [i].GetComponent<Animator> ().SetInteger ("ani_state", 2);
+
 			for (int i = 0; i < variable.selectnpc_count; i++)
 			{
 				Debug.Log(variable.selectnpc[i].name);
@@ -169,10 +174,13 @@ public class PointHand : MonoBehaviour
 				npcmove.commandstate = NPCMove.CommandState.FRUIT_PICKING;
 			}
 		}
+
 		//사냥하기
 		if (CheckHuntMotion() == true)
 		{
 			Debug.Log("사냥");
+			variable.selectnpc [i].GetComponent<Animator> ().SetInteger ("ani_state", 2);
+
 			for (int i = 0; i < variable.selectnpc_count; i++)
 			{
 				Debug.Log(variable.selectnpc[i].name);
@@ -180,12 +188,14 @@ public class PointHand : MonoBehaviour
 				npcmove.commandstate = NPCMove.CommandState.HIT_SMALL_ANIMALL;
 			}
 		}
+
 		//플레이어 직진
 		if (CheckGoMotion() == true)
 		{
 			float fMove = Time.deltaTime * speed;
 			Player.transform.Translate(Vector3.forward * fMove);
 		}
+
 		//UI
 		if (CheckUIMotion() == true)
 		{

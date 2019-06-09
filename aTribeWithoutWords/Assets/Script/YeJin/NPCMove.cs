@@ -66,6 +66,9 @@ public class NPCMove : MonoBehaviour
     protected Vector3 lastAgentVelocity;
     protected NavMeshPath lastAgentPath;
 
+	//애니메이션
+	public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +76,7 @@ public class NPCMove : MonoBehaviour
 		Cave = GameObject.Find ("동굴");
 		Itemlist = GameObject.Find ("variable");
 		Main_Camera = GameObject.Find ("Main Camera");
+		animator = this.GetComponent<Animator> ();
 
         variable = Itemlist.GetComponent<Variable>();
 		npcitem = this.GetComponent<NPCItem> ();
@@ -146,10 +150,10 @@ public class NPCMove : MonoBehaviour
     void Update()
     {
 		//현재 선택 리스트에 자신의 object가 있다면 자신의 effect도 따라오게 한다
-        if(CheckList())
-        {
-            GameObject.Find(this.name + "Effect").transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
-        }
+        //if(CheckList())
+        //{
+            //GameObject.Find(this.name + "Effect").transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.3f, this.transform.position.z);
+        //}
     }
 
 	//자율이동 상태
@@ -184,6 +188,7 @@ public class NPCMove : MonoBehaviour
         {
             if (CheckList())
             {
+				animator.SetInteger ("ani_state", 1);
                 PauseMove();
             }
         }
