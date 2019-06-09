@@ -400,7 +400,7 @@ public class NPCMove : MonoBehaviour
     }
 
 	//체크리스트에 본인이 있는지 확인
-    bool CheckList()
+    private bool CheckList()
     {
         for(int i = 0; i < variable.selectnpc_count; i++)
         {
